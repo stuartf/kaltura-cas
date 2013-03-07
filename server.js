@@ -43,8 +43,14 @@ var success = function(res, userId) {
     shasum.update(salt + info);
     var signature = shasum.digest('hex');
     var hashed = new Buffer(signature + '|' + info).toString('base64');
+    var mspath = config.kaltura.path;
+    if (mspath) {
+        mspath += '/';
+    } else {
+        mspath = '';
+    }
     res.redirect(config.kaltura.host +
-            '/mediaspacefolder/user/authenticate/sessionKey/' + hashed);
+            '/' + mspath + 'user/authenticate/sessionKey/' + hashed);
 };
 
 app.listen(8080);
