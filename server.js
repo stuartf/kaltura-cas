@@ -6,7 +6,6 @@ var config = require('./config.json');
 
 var app = express();
 var cas = new CAS(config.cas);
-var shasum = crypto.createHash('sha1');
 
 app.get('/login', function(req, res){
     var ticket = req.param('ticket');
@@ -40,6 +39,7 @@ var success = function(res, userId) {
     // random number from 0-32000
     var r = Math.floor(Math.random() * 32000);
     var info = userId + ';' + userRole + ';;' + expires + ';' + r;
+    var shasum = crypto.createHash('sha1');
     shasum.update(salt + info);
     var signature = shasum.digest('hex');
     var hashed = new Buffer(signature + '|' + info).toString('base64');
