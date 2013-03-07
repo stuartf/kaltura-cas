@@ -35,7 +35,7 @@ var success = function(res, userId) {
     var userRole = config.kaltura.roles[userId] || config.kaltura.defaultRole;
     var salt = config.kaltura.secret;
     // Expires in 24 hours
-    var expires = Date.now() / 1000 + (60 * 60 * 24);
+    var expires = Math.floor(Date.now() / 1000) + (60 * 60 * 24);
     // random number from 0-32000
     var r = Math.floor(Math.random() * 32000);
     var info = userId + ';' + userRole + ';;' + expires + ';' + r;
