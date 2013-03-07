@@ -53,4 +53,4 @@ var success = function(res, userId) {
             '/' + mspath + 'user/authenticate/sessionKey/' + hashed);
 };
 
-app.listen(8080);
+app.listen(config.port || 8080);
